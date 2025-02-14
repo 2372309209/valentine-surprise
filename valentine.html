@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { background: #ff99cc; overflow: hidden; }
+        .heart {
+            position: absolute;
+            animation: beat 1s infinite;
+        }
+        @keyframes beat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .petal {
+            position: absolute;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); }
+        }
+        #message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            font-family: cursive;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div id="message">
+        <h1>❤️ 情人节快乐！❤️</h1>
+        <p>你的微笑是我每天的阳光</p>
+        <p>点击屏幕收获惊喜 ↓</p>
+    </div>
+
+    <script>
+        // 创建花瓣
+        function createPetals() {
+            for(let i=0; i<30; i++){
+                const petal = document.createElement('div');
+                petal.innerHTML = '🌸';
+                petal.className = 'petal';
+                petal.style.left = Math.random()*100 + 'vw';
+                petal.style.animationDuration = Math.random()*3 + 2 + 's';
+                document.body.appendChild(petal);
+            }
+        }
+
+        // 创建爱心
+        document.addEventListener('click', function(e){
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart';
+            heart.style.left = e.clientX + 'px';
+            heart.style.top = e.clientY + 'px';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 1000);
+        });
+
+        // 初始化
+        window.onload = createPetals;
+    </script>
+</body>
+</html>
